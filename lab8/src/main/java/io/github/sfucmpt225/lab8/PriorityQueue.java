@@ -9,7 +9,7 @@ public class PriorityQueue {
 
     // =========================================================================
     //  PROVIDED CODE: do not change anything in this section.
-    //  I will set up its test queues by writing the heap and size fields
+    //  I will set up my test queues by writing the heap and size fields
     //  directly, and read them to check your results. If you rename or change
     //  these fields, your methods cannot be tested.
     // =========================================================================

@@ -1,14 +1,12 @@
 # lab8
 
-A priority queue hands out its values in order of priority, not in the order they arrived. In lab 8, smaller numbers have higher priority: `poll()` always removes the smallest value in the queue. You will implement a `PriorityQueue` class that keeps its values in a binary min-heap stored in an array, the standard way to make both adding and removing a value take O(log n) time.
-
-You will write eight methods: three that work out where a node's parent and children are in the array, three that add, look at and remove values, a constructor that turns a whole array into a heap at once, and heap sort. 
+For lab 8, you will implement the `PriorityQueue` class that keeps its values in a binary min-heap stored in an array. You will write eight methods. Three methods work out where a node's parent and children are in the array. Three methods add, look at, and remove values respectively. And finally a constructor that turns a whole array into a heap at once and heap sorts it. 
 
 ## Objectivies
 
-- Storing a complete binary tree in an array, and moving between a node and its parent or children with index arithmetic.
-- Keeping the heap order when a value is added (sift up) and when the smallest value is removed (sift down).
-- Building a heap from an array in O(n) time, and using a priority queue to sort.
+- Storing a complete binary tree in an array and moving between a node and its parent or children with index arithmetic.
+- Keeping the heap order when a value is added (sifting up) and when the smallest value is removed (sifting down).
+- Building a heap from an array in O(n) time and using a priority queue to sort.
 
 ## Files
 
@@ -50,9 +48,8 @@ Because the tree is complete, the array has no gaps, and you can find a node's f
 
 For example, the node at index 1 (value 3) has its children at indexes 3 and 4 (values 7 and 4), and its parent at index 0.
 
-The queue's values are in `heap[0]` to `heap[size - 1]`. Everything from `heap[size]` on is unused space, whatever it holds: **a child exists only if its index is less than `size`**. In the heap above (`size` is 7), the node at index 3 would have its children at indexes 7 and 8, so it has none: it is a leaf.
+The queue's values are in `heap[0]` to `heap[size - 1]`. Everything from `heap[size]` on is unused space, whatever it holds: a child exists only if its index is less than `size`. In the heap above (`size` is 7), the node at index 3 would have its children at indexes 7 and 8, so it has none: it is a leaf.
 
-The examples in this README write a heap as its array, such as `[1, 3, 2, 7, 4, 9, 5]`, and `[]` is the empty queue. `toString()` writes heaps the same way, and so do `Main.java`.
 
 ## The provided code
 
@@ -70,24 +67,14 @@ The `PROVIDED CODE` section at the top of `PriorityQueue.java` gives you:
 
 ## Rules
 
-1. **Keep the provided code.** Do not change anything in the `PROVIDED CODE` section of `PriorityQueue.java`. Do not rename the class or the eight methods, change their parameters or return types, or replace the `package` line. I will set up its test queues by writing the `heap` and `size` fields directly, and checks your results by reading them.
-2. **Do not add fields.** Do not add instance variables or static variables: a queue is exactly its `heap` and its `size`. Use parameters, local variables and private helper methods instead. You may add as many private helper methods as you like; `siftUp` and `siftDown` are already suggested at the bottom of the file.
-3. **One file.** All of your code goes in `PriorityQueue.java`. It must compile on its own, using only the standard Java library.
-4. **Write the heap yourself.** Do not use `java.util.PriorityQueue`, `TreeSet`, `TreeMap` or any sorting method from the Java library (`Arrays.sort`, `Collections.sort`, `List.sort`, or a stream's `sorted`). 
-5. **Exceptions.** The only exception your code may throw is an `IllegalStateException` from `peek()` or `poll()` when the queue is empty. Do not call `System.exit`.
-
-Only the results are marked: there are no marks for style or comments, and anything your code prints is ignored.
+1. **Keep the provided code.** Do not change anything in the `PROVIDED CODE` section of `PriorityQueue.java`. Do not rename the class or the eight methods, change their parameters or return types, or replace the `package` line. I will set up my test queues by writing the `heap` and `size` fields directly, and check your results by reading them.
+2. **Do not add fields.** Do not add instance variables or static variables: a queue is exactly its `heap` and its `size`. Use parameters, local variables and private helper methods instead. You may add as many private helper methods as you like; `siftUp`, `siftDown`, etc.
+3. **Write the heap yourself.** Do not use `java.util.PriorityQueue`, `TreeSet`, `TreeMap` or any sorting method from the Java library (`Arrays.sort`, `Collections.sort`, `List.sort`, or a stream's `sorted`). 
+4. **Exceptions.** The only exception your code may throw is an `IllegalStateException` from `peek()` or `poll()` when the queue is empty. Do not call `System.exit`.
 
 ## Testing
 
-From the folder that holds the files:
-
-```bash
-javac PriorityQueue.java Main.java
-java Main
-```
-
-(or run `Main` from your IDE). `Main` runs the examples above and prints `PASS`, `FAIL`, `ERROR` (an exception was thrown) or `NOT DONE` for each one:
+Main runs the examples above and prints `PASS`, `FAIL`, `ERROR` (an exception was thrown) or `NOT DONE` for each one:
 
 ```text
 insert(int)
@@ -101,32 +88,14 @@ insert(int)
 Passed 27 of 32 checks.
 ```
 
-The checks for `peek()` and `poll()` build their queues with `insert()`, so do `insert()` first.
+I will use my own queues and arrays (empty and full arrays, heaps where a value moves all the way, part of the way or not at all, repeated and negative values, larger random heaps), so passing every check in `Main` does not guarantee full marks. Add your own checks: copy a `check(...)` line in `main` and change the values and the expected answer.
 
-`Main` is not marked. I will use its own queues and arrays (empty and full arrays, heaps where a value moves all the way, part of the way or not at all, repeated and negative values, larger random heaps), so passing every check in `Main` does not guarantee full marks. Add your own checks: copy a `check(...)` line in `main` and change the values and the expected answer.
+## Rubric
 
-## Submission
-
-Submit one zip file named `<your-username>-submission.zip` (for example `jdoe-submission.zip`) that contains your `PriorityQueue.java`. You may include `Main.java` too, but only `PriorityQueue.java` is marked.
-
-Before you submit, check that:
-
-- [ ] your name and student number are in the comment at the top of `PriorityQueue.java`;
-- [ ] `javac PriorityQueue.java` compiles with no errors;
-- [ ] the provided code is unchanged, the class name and the method headers are unchanged, and there is no `package` line;
-- [ ] you have not added any fields;
-- [ ] no method throws an exception, except `peek()` and `poll()` on an empty queue;
-- [ ] you have not used `java.util.PriorityQueue` or a library sorting method;
-- [ ] the zip file really contains `PriorityQueue.java` (open it and look).
-
-## Marking
-
-Your code is marked automatically: **40 test cases × 1 mark = 40 marks**. There are no marks for style or comments; only the results count.
+40 test cases × 1 mark = 40 marks. 
 
 - **Compiling.** If `PriorityQueue.java` does not compile, the whole assignment scores **0**.
-- **Test cases.** Each test case runs one method on one or more queues or arrays, each made fresh. A test case earns its mark only if every result in it is right. I will set up each queue itself, by writing `heap` and `size`, so a bug in one method cannot spoil the tests of another, except `heapSort`, which uses your other methods.
-- **The exact heap.** After `insert`, `poll` and the constructor, I will read your `heap` and `size` and compare them with the heap that the steps in this README produce. When all the values are different, there is only one right heap. When some values repeat, any valid heap that holds the right values is accepted.
-- **Calling twice.** `peek()` and `heapSort()` are called twice in each check, and both answers must be right; `peek()` must also leave the queue unchanged.
+- **Test cases.** Each test case runs one method on one or more queues or arrays, each made fresh. A test case earns its mark only if every result in it is right. 
 - **Unexpected exceptions.** If a method throws an exception that this README does not allow, in **any** of its test cases, that method scores **0** for **all** of its test cases. This includes an `ArrayIndexOutOfBoundsException` (for example, from a missing `grow()` or from reading a child that does not exist), a `NullPointerException`, a `StackOverflowError`, the `UnsupportedOperationException` of a method you have not done, a `NoSuchElementException` from an empty queue (it must be an `IllegalStateException`), and an `IllegalStateException` from `peek()` or `poll()` on a queue that is not empty. Calling `System.exit` counts the same way.
 - **Time limit.** A test case that runs for more than 5 seconds (for example, because of an infinite loop) scores 0.
 
